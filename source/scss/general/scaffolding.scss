@@ -99,3 +99,37 @@ img {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+@for $textBlock from 1 through 10 {
+  .text-block:nth-child(#{$textBlock}) {
+    @for $letter from 1 through 10 {
+      .letter--#{$letter} {
+        animation-delay: $letter * 0.1s + 0.3s * ($textBlock - 1);
+      }
+    }
+  }
+}
+
+.text-block {
+  display: flex;
+  overflow: hidden;
+  padding-top: 2rem;
+}
+
+.letter {
+  animation: showLetters $anim-duration-middle ease both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes showLetters {
+  0% {
+    transform: translate3d(0, 110%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
